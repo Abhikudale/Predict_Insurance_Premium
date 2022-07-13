@@ -1,4 +1,5 @@
 
+from this import d
 from sklearn.model_selection import StratifiedShuffleSplit
 from six.moves import urllib
 from insurance.entity.config_entity import DataIngestionConfig
@@ -9,6 +10,7 @@ import pandas as pd
 import numpy as np
 import os, sys
 import tarfile
+import shutil
 
 class DataIngestion:
     def __init__(self, data_ingestion_config:DataIngestionConfig):
@@ -33,8 +35,9 @@ class DataIngestion:
 
             tgz_file_path = os.path.join(tgz_download_dir,insurance_file_name)
             logging.info(f"Downloading file from :[{download_url}] in to :[{tgz_file_path}]")
-            #urllib.request.
-            urllib.request.urlretrieve(download_url,tgz_file_path)
+            
+            shutil.copyfile(download_url,tgz_file_path)
+            #urllib.request.urlretrieve(download_url,tgz_file_path)
             logging.info(f"File:[{tgz_file_path}] has been downloaded successfully")
 
             return tgz_file_path
@@ -52,8 +55,8 @@ class DataIngestion:
             os.makedirs(raw_data_dir,exist_ok=True)
 
             logging.info("Extracting tgz file: [{tgz_file_path}] in to dir: [{raw_data_dir}]")
-            with tarfile.open(tgz_file_path) as insurance_tgz_file_obj:
-                insurance_tgz_file_obj.extractall(path=raw_data_dir)
+            #with tarfile.open(tgz_file_path) as insurance_tgz_file_obj:
+                #insurance_tgz_file_obj.extractall(path=raw_data_dir)
             logging.info(f"Extraction completed")
             
         
