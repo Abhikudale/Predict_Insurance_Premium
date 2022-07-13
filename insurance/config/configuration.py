@@ -1,11 +1,11 @@
 import sys, os
-from housing.entity.config_entity import DataIngestionConfig,\
+from insurance.entity.config_entity import DataIngestionConfig,\
 DataValidationConfig, DataTransformationConfig, ModelTrainerConfig,\
 ModelEvaluationConfig, ModelPusherConfig, TrainingPipelineConfig
-from housing.util.util import read_yaml_file
-from housing.constant import *
-from housing.exception import HousingException
-from housing.logger import logging
+from insurance.util.util import read_yaml_file
+from insurance.constant import *
+from insurance.exception import InsuranceException
+from insurance.logger import logging
 
 class Configuration:
 
@@ -18,7 +18,7 @@ class Configuration:
             self.training_pipeline_config = self.get_training_pipeline_config()
             self.time_stamp = current_time_stamp
         except Exception as e:
-            raise HousingException(e,sys) from e
+            raise InsuranceException(e,sys) from e
 
 
     def get_data_ingestion_config(self) ->DataIngestionConfig:
@@ -67,7 +67,7 @@ class Configuration:
             return data_ingestion_config
             
         except Exception as e:
-            raise HousingException(e,sys) from e
+            raise InsuranceException(e,sys) from e
 
     def get_data_validation_config(self) ->DataValidationConfig:
         try:
@@ -103,7 +103,7 @@ class Configuration:
             return data_validation_config
             
         except Exception as e:
-            raise HousingException(e,sys) from e
+            raise InsuranceException(e,sys) from e
     
     def get_data_transformation_config(self) -> DataTransformationConfig:
         try:
@@ -142,7 +142,6 @@ class Configuration:
             )
 
             data_transformation_config=DataTransformationConfig(
-                add_bedroom_per_room=add_bedroom_per_room,
                 preprocessed_object_file_path=preprocessed_object_file_path,
                 transformed_train_dir=transformed_train_dir,
                 transformed_test_dir=transformed_test_dir
@@ -153,7 +152,7 @@ class Configuration:
             return data_transformation_config
         
         except Exception as e:
-            raise HousingException(e,sys) from e
+            raise InsuranceException(e,sys) from e
 
     def get_model_trainer_config(self) ->ModelTrainerConfig:
         try:
@@ -184,7 +183,7 @@ class Configuration:
             logging.info(f"Model trainer config: {model_trainer_config}")
             return model_trainer_config
         except Exception as e:
-            raise HousingException(e,sys) from e
+            raise InsuranceException(e,sys) from e
     
     def get_model_evaluation_config(self) ->ModelEvaluationConfig:
         try:
@@ -201,7 +200,7 @@ class Configuration:
             logging.info(f"Model Evaluation Config: {response}.")
             return response
         except Exception as e:
-            raise HousingException(e,sys) from e
+            raise InsuranceException(e,sys) from e
 
 
     def get_model_pusher_config(self) -> ModelPusherConfig:
@@ -216,7 +215,7 @@ class Configuration:
             return model_pusher_config
 
         except Exception as e:
-            raise HousingException(e,sys) from e
+            raise InsuranceException(e,sys) from e
 
     def get_training_pipeline_config(self) ->TrainingPipelineConfig:
         try:
@@ -233,4 +232,4 @@ class Configuration:
             return training_pipeline_config
 
         except Exception as e:
-            raise HousingException(e,sys) from e
+            raise InsuranceException(e,sys) from e

@@ -1,34 +1,34 @@
 columns:
-  longitude: float
-  latitude: float
-  housing_median_age: float
-  total_rooms: float
-  total_bedrooms: float
-  population: float
-  households: float
-  median_income: float
-  median_house_value: float
-  ocean_proximity: category
-
+  age: int
+  sex: category
+  bmi: float
+  children: int
+  smoker: category
+  region: category
+  expenses: float
+  
 numerical_columns:
-  - longitude
-  - latitude
-  - housing_median_age
-  - total_rooms
-  - total_bedrooms
-  - population
-  - households
-  - median_income
+  - age
+  - bmi
+  - children
   
 categorical_columns:
-  - ocean_proximity
+  - category
+  - region
 
-target_column: median_house_value
+target_column: expenses
 
-domain_value:
-  ocean_proximity:
-    - <1H OCEAN
-    - INLAND
-    - ISLAND
-    - NEAR BAY
-    - NEAR OCEAN
+domain_value: 
+  sex: 
+    - male
+    - female
+    
+  smoker: 
+    - yes
+    - no
+    
+  region:
+    - southwest
+    - southeast
+    - northwest
+    - northeast

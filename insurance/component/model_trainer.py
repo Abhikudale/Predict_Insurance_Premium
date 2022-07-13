@@ -1,17 +1,17 @@
 
-from housing.exception import HousingException
+from insurance.exception import InsuranceException
 import sys
-from housing.logger import logging
+from insurance.logger import logging
 from typing import List
-from housing.entity.artifact_entity import DataTransformationArtifact, ModelTrainerArtifact
-from housing.entity.config_entity import ModelTrainerConfig
-from housing.util.util import load_numpy_array_data,save_object,load_object
-from housing.entity.model_factory import MetricInfoArtifact, ModelFactory,GridSearchedBestModel
-from housing.entity.model_factory import evaluate_regression_model
+from insurance.entity.artifact_entity import DataTransformationArtifact, ModelTrainerArtifact
+from insurance.entity.config_entity import ModelTrainerConfig
+from insurance.util.util import load_numpy_array_data,save_object,load_object
+from insurance.entity.model_factory import MetricInfoArtifact, ModelFactory,GridSearchedBestModel
+from insurance.entity.model_factory import evaluate_regression_model
 
 
 
-class HousingEstimatorModel:
+class InsuranceEstimatorModel:
     def __init__(self, preprocessing_object, trained_model_object):
         """
         TrainedModel constructor
@@ -47,7 +47,7 @@ class ModelTrainer:
             self.model_trainer_config = model_trainer_config
             self.data_transformation_artifact = data_transformation_artifact
         except Exception as e:
-            raise HousingException(e, sys) from e
+            raise InsuranceException(e, sys) from e
 
     def initiate_model_trainer(self)->ModelTrainerArtifact:
         try:
@@ -92,9 +92,9 @@ class ModelTrainer:
 
 
             trained_model_file_path=self.model_trainer_config.trained_model_file_path
-            housing_model = HousingEstimatorModel(preprocessing_object=preprocessing_obj,trained_model_object=model_object)
+            insurance_model = InsuranceEstimatorModel(preprocessing_object=preprocessing_obj,trained_model_object=model_object)
             logging.info(f"Saving model at path: {trained_model_file_path}")
-            save_object(file_path=trained_model_file_path,obj=housing_model)
+            save_object(file_path=trained_model_file_path,obj=insurance_model)
 
 
             model_trainer_artifact=  ModelTrainerArtifact(is_trained=True,message="Model Trained successfully",
@@ -110,7 +110,7 @@ class ModelTrainer:
             logging.info(f"Model Trainer Artifact: {model_trainer_artifact}")
             return model_trainer_artifact
         except Exception as e:
-            raise HousingException(e, sys) from e
+            raise InsuranceException(e, sys) from e
 
     def __del__(self):
         logging.info(f"{'>>' * 30}Model trainer log completed.{'<<' * 30} ")
