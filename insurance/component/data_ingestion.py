@@ -57,6 +57,7 @@ class DataIngestion:
             logging.info("Extracting tgz file: [{tgz_file_path}] in to dir: [{raw_data_dir}]")
             #with tarfile.open(tgz_file_path) as insurance_tgz_file_obj:
                 #insurance_tgz_file_obj.extractall(path=raw_data_dir)
+            shutil.copy(tgz_file_path,raw_data_dir)
             logging.info(f"Extraction completed")
             
         
@@ -75,10 +76,13 @@ class DataIngestion:
 
             insurance_data_frame = pd.read_csv(insurance_file_path)
             
-            insurance_data_frame["income_cat"] = pd.cut(
-                insurance_data_frame["median_income"],
-                bins=[0.0, 1.5, 3.0, 4.5, 6.0, np.inf],
-                labels= [1,2,3,4,5]
+            #Dropping Sex column as output column expenses is not dependent on Sex column
+            insurance_data_frame.drop(columns="sex", axis=1, inplace=True)
+
+            insurance_data_frame["age_cat"] = pd.cut(
+                insurance_data_frame["age"],
+                bins=[0, 20, 30, 40, 50, 60, np.inf],
+                labels= [1,2,3,4,5,6]
             )
 
             logging.info(f"Splitting data in to Train and Test dataset")
@@ -89,9 +93,9 @@ class DataIngestion:
 
             split = StratifiedShuffleSplit(n_splits=1, test_size=0.2, random_state=42)
 
-            for train_index, test_index in split.split(insurance_data_frame, insurance_data_frame["income_cat"]):
-                strat_train_set = insurance_data_frame.loc[train_index].drop(["income_cat"], axis=1)
-                strat_test_set = insurance_data_frame.loc[test_index].drop(["income_cat"], axis=1)
+            for train_index, test_index in split.split(insurance_data_frame, insurance_data_frame["age_cat"]):
+                strat_train_set = insurance_data_frame.loc[train_index].drop(["age_cat"], axis=1)
+                strat_test_set = insurance_data_frame.loc[test_index].drop(["age_cat"], axis=1)
             
             train_file_path = os.path.join(self.data_ingestion_config.ingested_train_dir,file_name)
 

@@ -13,7 +13,7 @@ numerical_columns:
   - children
   
 categorical_columns:
-  - category
+  - smoker
   - region
 
 target_column: expenses
