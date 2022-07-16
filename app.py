@@ -27,8 +27,8 @@ MODEL_DIR = os.path.join(ROOT_DIR, SAVED_MODELS_DIR_NAME)
 
 from insurance.logger import get_log_dataframe
 
-HOUSING_DATA_KEY = "insurance_data"
-MEDIAN_HOUSING_VALUE_KEY = "median_house_value"
+INSURANCE_DATA_KEY = "insurance_data"
+EXPENSES_VALUE_KEY = "expenses"
 
 app = Flask(__name__)
 
@@ -103,37 +103,32 @@ def train():
 @app.route('/predict', methods=['GET', 'POST'])
 def predict():
     context = {
-        HOUSING_DATA_KEY: None,
-        MEDIAN_HOUSING_VALUE_KEY: None
+        INSURANCE_DATA_KEY: None,
+        EXPENSES_VALUE_KEY: None
     }
 
     if request.method == 'POST':
-        longitude = float(request.form['longitude'])
-        latitude = float(request.form['latitude'])
-        insurance_median_age = float(request.form['insurance_median_age'])
-        total_rooms = float(request.form['total_rooms'])
-        total_bedrooms = float(request.form['total_bedrooms'])
-        population = float(request.form['population'])
-        households = float(request.form['households'])
-        median_income = float(request.form['median_income'])
-        ocean_proximity = request.form['ocean_proximity']
+        age = float(request.form['age'])
+        sex = float(request.form['sex'])
+        bmi = float(request.form['bmi'])
+        children = float(request.form['children'])
+        smoker = float(request.form['smoker'])
+        region = float(request.form['region'])
+        
 
-        insurance_data = InsuranceData(longitude=longitude,
-                                   latitude=latitude,
-                                   insurance_median_age=insurance_median_age,
-                                   total_rooms=total_rooms,
-                                   total_bedrooms=total_bedrooms,
-                                   population=population,
-                                   households=households,
-                                   median_income=median_income,
-                                   ocean_proximity=ocean_proximity,
+        insurance_data = InsuranceData(age=age,
+                                   sex=sex,
+                                   bmi=bmi,
+                                   children=children,
+                                   smoker=smoker,
+                                   region=region
                                    )
         insurance_df = insurance_data.get_insurance_input_data_frame()
         insurance_predictor = InsurancePredictor(model_dir=MODEL_DIR)
-        median_insurance_value = insurance_predictor.predict(X=insurance_df)
+        expenses = insurance_predictor.predict(X=insurance_df)
         context = {
-            HOUSING_DATA_KEY: insurance_data.get_insurance_data_as_dict(),
-            MEDIAN_HOUSING_VALUE_KEY: median_insurance_value,
+            INSURANCE_DATA_KEY: insurance_data.get_insurance_data_as_dict(),
+            EXPENSES_VALUE_KEY: expenses,
         }
         return render_template('predict.html', context=context)
     return render_template("predict.html", context=context)

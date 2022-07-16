@@ -13,76 +13,58 @@
 
 
         <form action="/predict" method="post">
-            <legend>Insurance Estimation Form</legend>
+            <legend>Insurance Premium Estimation Form</legend>
             <div class="mb-3">
-                <label class="form-label">Longitude</label>
-                <input class="form-control" type="text" name="longitude" placeholder="Enter a value of longitude"
+                <label class="form-label">Age</label>
+                <input class="form-control" type="text" name="age" placeholder="Enter a value of age"
                     required />
             </div>
             <div class="mb-3">
-                <label class="form-label">Latitude</label>
-                <input class="form-control" type="text" name="latitude" placeholder="Enter a value of latitude"
-                    required />
-
-            </div>
-            <div class="mb-3">
-                <label class="form-label">House Median Age</label>
-                <input class="form-control" type="text" name="insurance_median_age"
-                    placeholder="Enter a value of insurance_median_age" />
-
-            </div>
-            <div class="mb-3">
-                <label class="form-label">Total Rooms</label>
-                <input class="form-control" type="text" name="total_rooms" placeholder="Enter a value of total_rooms"
+                <label class="form-label">Sex</label>
+                <input class="form-control" type="text" name="sex" placeholder="Enter sex"
                     required />
 
             </div>
             <div class="mb-3">
-                <label class="form-label">Total Bedrooms</label>
-                <input class="form-control" type="text" name="total_bedrooms"
-                    placeholder="Enter a value of total_bedrooms" required />
-            </div>
-            <div class="mb-3">
-                <label class="form-label">Population</label>
-                <input class="form-control" type="text" name="population" placeholder="Enter a value of population"
-                    required />
-            </div>
-            <div class="mb-3">
-                <label class="form-label">Households</label>
-                <input class="form-control" type="text" name="households" placeholder="Enter a value of households"
-                    required />
-            </div>
-            <div class="mb-3">
-                <label class="form-label">Median Income</label>
-                <input class="form-control" type="text" name="median_income"
-                    placeholder="Enter a value of median_income" required />
-            </div>
-            <div class="mb-3">
-                <label class="form-label">Ocean Proximity</label>
-                <select class="form-control" name="ocean_proximity" placeholder="Enter a value of ocean_proximity"
-                    required>
+                <label class="form-label">Body Mass Index</label>
+                <input class="form-control" type="text" name="bmi"
+                    placeholder="Enter a value of bmi" />
 
-                    <option value="<1H OCEAN">
-                        &lt;1H OCEAN
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Number of children</label>
+                <input class="form-control" type="text" name="children" placeholder="Enter number of children"
+                    required />
+
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Smoker</label>
+                <input class="form-control" type="text" name="smoker"
+                    placeholder="Enter Yes/No smoker" required />
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Region</label>
+                <input class="form-control" type="text" name="region" placeholder="Enter region from southwest, southeast, northwest, northeast
+                    required "/>
+            </div>
+                    <option value="southwest">
+                        southwest
                     </option>
-                    <option value="INLAND">
-                        INLAND
+                    <option value="southeast">
+                        southeast
                     </option>
-                    <option value="NEAR BAY">
-                        NEAR BAY
+                    <option value="northwest">
+                        northwest
                     </option>
-                    <option value="NEAR OCEAN">
-                        NEAR OCEAN
-                    </option>
-                    <option value="ISLAND">
-                        ISLAND
+                    <option value="northeast">
+                        northeast
                     </option>
 
                 </select>
             </div>
             <div class="mb-3">
 
-                <input class="btn btn-primary" type="submit" value="Predict Median House Value" required />
+                <input class="btn btn-primary" type="submit" value="Predict Insurance Premium Price" required />
             </div>
 
         </form>
@@ -91,12 +73,12 @@
     <div class="col-md-6 col-sm-12 col-xs-6 col-lg-6">
         <div class="card">
             <div class="card-header">
-              California insurance price
+              Insurance premium price
             </div>
             <div class="card-body">
         {% if context['insurance_data'] is not none %}
         <table class="table table-striped">
-            <caption>Califoria Insurance Prediction </caption>
+            <caption>Insurance Premium Prediction </caption>
             <tr>
                 <th>Input Feature</th>
                 <th>Feature Value</th>
@@ -124,7 +106,7 @@
         {% else %}
        
               <h5 class="card-title">Submit Form</h5>
-              <p class="card-text">Kindly provide necessary information to estimate insurance price in california</p>
+              <p class="card-text">Kindly provide necessary information to estimate premium insurance price</p>
             
          
 
