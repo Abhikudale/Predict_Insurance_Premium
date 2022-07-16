@@ -16,8 +16,8 @@ class InsuranceData:
                 children : int,
                 smoker : str,
                 region : str,
-                expenses : float
-                 ):
+                expenses : float= None
+                ):
         try:
             self.age = age
             self.sex = sex

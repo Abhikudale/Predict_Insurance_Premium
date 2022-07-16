@@ -108,12 +108,12 @@ def predict():
     }
 
     if request.method == 'POST':
-        age = float(request.form['age'])
-        sex = float(request.form['sex'])
+        age = int(request.form['age'])
+        sex = str(request.form['sex'])
         bmi = float(request.form['bmi'])
-        children = float(request.form['children'])
-        smoker = float(request.form['smoker'])
-        region = float(request.form['region'])
+        children = int(request.form['children'])
+        smoker = str(request.form['smoker'])
+        region = str(request.form['region'])
         
 
         insurance_data = InsuranceData(age=age,
