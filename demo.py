@@ -12,10 +12,12 @@ def main():
     try:
         #data_validation_config=Configuration().get_data_transformation_config()
         #print(data_validation_config)
-        ##config_path = os.path.join("config","config.yaml")
-        ##pipeline = Pipeline(Configuration(config_file_path=config_path))
-        ##pipeline.start()
-        ##logging.info("main function execution completed.")
+        #Start:-Execute below code to create model
+        config_path = os.path.join("config","config.yaml")
+        pipeline = Pipeline(Configuration(config_file_path=config_path))
+        pipeline.start()
+        logging.info("main function execution completed.")
+        #End:-Execute below code to create model
         #data_validation_config = Configuration().get_data_transformation_config()
         #print(data_validation_config)
         #schema_file_path=r"D:\Project\machine_learning_project\config\schema.yaml"
@@ -25,17 +27,17 @@ def main():
         # print(df.columns)
         # print(df.dtypes)
 
-        insurance_data = InsuranceData(age=56,
-                                   sex="male",
-                                   bmi=32.4,
-                                   children=4,
-                                   smoker="no",
-                                   region="southwest"
-                                   )
-        insurance_df = insurance_data.get_insurance_input_data_frame()
-        model = load_object(file_path=r"C:\MLProjects\Predict_Insurance_Premium\insurance\artifact\model_trainer\2022-07-16-17-03-01\trained_model\model.pkl")
-        expenses = model.predict(insurance_df)
-        print(expenses)
+        # insurance_data = InsuranceData(age=56,
+        #                            sex="male",
+        #                            bmi=32.4,
+        #                            children=4,
+        #                            smoker="no",
+        #                            region="southwest"
+        #                            )
+        # insurance_df = insurance_data.get_insurance_input_data_frame()
+        # model = load_object(file_path=r"C:\MLProjects\Predict_Insurance_Premium\saved_models\20220806135312\model.pkl")
+        # expenses = model.predict(insurance_df)
+        # print(expenses)
 
     except Exception as e:
         logging.error(f"{e}")

@@ -5,22 +5,22 @@ grid_search:
     cv: 5
     verbose: 2
 model_selection:
+  # module_0:
+  #   class: AdaBoostRegressor
+  #   module: sklearn.ensemble
+  #   params:
+  #     loss: linear
+  #     learning_rate: 0.1
+  #   search_param_grid:
+  #     loss:
+  #     - linear
+  #     - square
+  #     - exponential
+  #     learning_rate: 
+  #     - 0.05
+  #     - 0.1
+  #     - 0.5
   module_0:
-    class: AdaBoostRegressor
-    module: sklearn.ensemble
-    params:
-      loss: linear
-      learning_rate: 0.1
-    search_param_grid:
-      loss:
-      - linear
-      - square
-      - exponential
-      learning_rate: 
-      - 0.05
-      - 0.1
-      - 0.5
-  module_1:
     class: LinearRegression
     module: sklearn.linear_model
     params:
@@ -29,46 +29,46 @@ model_selection:
       fit_intercept:
       - true
       - false
-  module_2:
-    class: GradientBoostingRegressor
-    module: sklearn.ensemble
-    params:
-      loss: squared_error
-      learning_rate: 0.1
-    search_param_grid:
-      loss:
-      - squared_error
-      - absolute_error
-      - huber
-      learning_rate: 
-      - 0.05
-      - 0.1
-      - 0.001
-      alpha:
-      - 0.05
-      - 0.15
-      - 0.5
-  module_3:
-    class: XGBRegressor
-    module: xgboost
-    params:
-      eta: 0.01
-      n_estimators: 200
-      subsample: 0.5
-    search_param_grid:
-      eta: 
-      - 0.001
-      - 0.01
-      - 0.1
-      n_estimators:
-      - 200
-      - 400
-      - 1000
-      subsample:
-      - 0.05
-      - 0.15
-      - 0.5
-  module_4:
+  # module_2:
+  #   class: GradientBoostingRegressor
+  #   module: sklearn.ensemble
+  #   params:
+  #     loss: squared_error
+  #     learning_rate: 0.1
+  #   search_param_grid:
+  #     loss:
+  #     - squared_error
+  #     - absolute_error
+  #     - huber
+  #     learning_rate: 
+  #     - 0.05
+  #     - 0.1
+  #     - 0.001
+  #     alpha:
+  #     - 0.05
+  #     - 0.15
+  #     - 0.5
+  # module_3:
+  #   class: XGBRegressor
+  #   module: xgboost
+  #   params:
+  #     eta: 0.01
+  #     n_estimators: 200
+  #     subsample: 0.5
+  #   search_param_grid:
+  #     eta: 
+  #     - 0.001
+  #     - 0.01
+  #     - 0.1
+  #     n_estimators:
+  #     - 200
+  #     - 400
+  #     - 1000
+  #     subsample:
+  #     - 0.05
+  #     - 0.15
+  #     - 0.5
+  module_1:
     class: RandomForestRegressor
     module: sklearn.ensemble
     params:
@@ -76,8 +76,6 @@ model_selection:
       n_estimators: 100
     search_param_grid:
       min_samples_leaf:
-      - 4
       - 9
-      - 7
       n_estimators: 
       - 110
