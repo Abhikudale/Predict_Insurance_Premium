@@ -1,8 +1,9 @@
 from flask import Flask, request
 import sys
+import numpy as np
 
 import pip
-from insurance.util.util import read_yaml_file, write_yaml_file
+from insurance.util.util import load_object, read_yaml_file, write_yaml_file
 from matplotlib.style import context
 from insurance.logger import logging
 from insurance.exception import InsuranceException
@@ -123,13 +124,19 @@ def predict():
                                    smoker=smoker,
                                    region=region
                                    )
+        print(age,sex,bmi,children,smoker,region)
+        print(MODEL_DIR)
+        print(insurance_data)
         insurance_df = insurance_data.get_insurance_input_data_frame()
+        print(insurance_df)
         insurance_predictor = InsurancePredictor(model_dir=MODEL_DIR)
         expenses = insurance_predictor.predict(X=insurance_df)
+        expenses=[np.round(x,2) for x in expenses]
         context = {
             INSURANCE_DATA_KEY: insurance_data.get_insurance_data_as_dict(),
-            EXPENSES_VALUE_KEY: expenses,
+            EXPENSES_VALUE_KEY: expenses[0],
         }
+        
         return render_template('predict.html', context=context)
     return render_template("predict.html", context=context)
 

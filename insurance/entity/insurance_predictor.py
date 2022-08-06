@@ -67,6 +67,7 @@ class InsurancePredictor:
             latest_model_dir = os.path.join(self.model_dir, f"{max(folder_name)}")
             file_name = os.listdir(latest_model_dir)[0]
             latest_model_path = os.path.join(latest_model_dir, file_name)
+            print(latest_model_path)
             return latest_model_path
         except Exception as e:
             raise InsuranceException(e, sys) from e

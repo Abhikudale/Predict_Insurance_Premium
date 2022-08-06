@@ -1,4 +1,6 @@
 import os
+
+import numpy as np
 from insurance.entity.insurance_predictor import InsuranceData, InsurancePredictor
 from insurance.pipeline.pipeline import Pipeline
 from insurance.exception import InsuranceException
@@ -26,7 +28,6 @@ def main():
         # df= DataTransformation.load_data(file_path=file_path,schema_file_path=schema_file_path)
         # print(df.columns)
         # print(df.dtypes)
-
         # insurance_data = InsuranceData(age=56,
         #                            sex="male",
         #                            bmi=32.4,
@@ -35,8 +36,11 @@ def main():
         #                            region="southwest"
         #                            )
         # insurance_df = insurance_data.get_insurance_input_data_frame()
-        # model = load_object(file_path=r"C:\MLProjects\Predict_Insurance_Premium\saved_models\20220806135312\model.pkl")
+        # model = load_object(file_path=r"C:\MLProjects\Predict_Insurance_Premium\saved_models\20220806162206\model.pkl")
         # expenses = model.predict(insurance_df)
+        # rounded = [np.round(x,2) for x in expenses]
+        # print(type(rounded))
+        # print(rounded[0])
         # print(expenses)
 
     except Exception as e:

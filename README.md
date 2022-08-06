@@ -42,3 +42,6 @@ Adding this line to check if auto deployment happens
 
 Install ipykernel
 pip install ipykernel
+
+#Setting flask app debug to True
+set FLASK_DEBUG=1

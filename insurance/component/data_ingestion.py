@@ -28,7 +28,10 @@ class DataIngestion:
             
             #folder location to download file
             tgz_download_dir = self.data_ingestion_config.tgz_download_dir
-
+            
+            ROOT_DIR = os.getcwd()
+            download_url = os.path.join(ROOT_DIR,download_url,"insurance.csv")
+            
             os.makedirs(tgz_download_dir,exist_ok=True)
 
             insurance_file_name = os.path.basename(download_url)
