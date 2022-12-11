@@ -78,7 +78,7 @@ class DataIngestion:
             logging.info(f"Reading csv file:[{insurance_file_path}]")
 
             insurance_data_frame = pd.read_csv(insurance_file_path)
-            
+            insurance_data_frame = insurance_data_frame.head(10000)
             #Dropping Sex column as output column expenses is not dependent on Sex column
             insurance_data_frame.drop(columns="sex", axis=1, inplace=True)
 
